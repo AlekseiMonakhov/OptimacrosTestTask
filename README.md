@@ -64,4 +64,3 @@ node index.js --help
    ```bash
    node index.js delete-car <id> TestUser TestPass
    ```
-```
