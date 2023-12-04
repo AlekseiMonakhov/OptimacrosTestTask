@@ -7,10 +7,15 @@ services:
     depends_on:
       - mongo
 
-  # client:
-  #   build: ./client
-  #   depends_on:
-  #     - server
+  client:
+    build: ./client
+    stdin_open: true
+    tty: true
+    command: tail -f /dev/null
+    depends_on:
+      - server
+    environment:
+      - API_URI=http://server:3000/api/v1  
 
   mongo:
     image: mongo
