@@ -1,8 +1,8 @@
 import express, { Express } from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
-import authRouter from './src/routes/authRouter';
 import carsRouter from './src/routes/carsRouter';
+import { basicAuthMiddleware } from './src/middlewares/basicAuth';
 
 dotenv.config();
 
@@ -15,7 +15,7 @@ if (!process.env.MONGO_URI) {
 const mongoUri = process.env.MONGO_URI as string;
 
 app.use(express.json());
-app.use('/api/v1', [authRouter, carsRouter]);
+app.use('/api/v1', basicAuthMiddleware, carsRouter);
 
 
 mongoose.connect(mongoUri)
